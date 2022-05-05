@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-
-namespace BlogEF.Models
+namespace BlogVisualStudio.Models
 {
     public class Role
     {

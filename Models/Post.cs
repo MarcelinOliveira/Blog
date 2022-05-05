@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BlogEF.Models
+namespace BlogVisualStudio.Models
 {
     [Table("Post")]
     public class Post

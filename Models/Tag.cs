@@ -1,10 +1,5 @@
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace BlogEF.Models
+namespace BlogVisualStudio.Models
 {
-
     public class Tag
     {
         public List<Post> Posts { get; set; }

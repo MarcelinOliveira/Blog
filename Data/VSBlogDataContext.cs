@@ -1,6 +1,6 @@
 using System;
 using BlogEF.Data.Mappings;
-using BlogEF.Models;
+using BlogVisualStudio.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogEF.Data
@@ -8,10 +8,13 @@ namespace BlogEF.Data
     public class VSBlogDataContext : DbContext
     {
         public DbSet<Category> Categories { get; set; }
+
         public DbSet<Post> Posts { get; set; }
+
         // public DbSet<PostTag> PostTags { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Tag> Tags { get; set; }
+
         public DbSet<User> Users { get; set; }
         // public DbSet<UserRole> UsersRoles { get; set; }
 
@@ -26,7 +29,5 @@ namespace BlogEF.Data
             modelbuilder.ApplyConfiguration(new UserMap());
             modelbuilder.ApplyConfiguration(new PostMap());
         }
-
-
     }
 }

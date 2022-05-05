@@ -4,10 +4,17 @@ namespace BlogVisualStudio.ViewModels
 {
     public class EditorCategoryViewModel
     {
-        [Required(ErrorMessage = "O Nome é um campo requerido")]
-        [StringLength(40, MinimumLength = 3, ErrorMessage = "Este campo deve conter entre 3 a 40 caracteres")]
+        public EditorCategoryViewModel(string slug, string name)
+        {
+            Slug = slug;
+            Name = name;
+        }
+
+        [Required(ErrorMessage = "The Name is a required camp")]
+        [StringLength(40, MinimumLength = 3, ErrorMessage = "Name must have contains 3-40 characters")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "O Slug é um campo requerido")]
+
+        [Required(ErrorMessage = "The Slug is a required camp")]
         public string Slug { get; set; }
     }
 }

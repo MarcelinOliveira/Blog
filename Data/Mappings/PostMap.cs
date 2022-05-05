@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using BlogEF.Models;
+using BlogVisualStudio.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,32 +17,32 @@ namespace BlogEF.Data.Mappings
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id)
-                    .ValueGeneratedOnAdd()//Gera um valor de identity toda vez que um id é adicionado
-                    .UseIdentityColumn(); //Referencia com a coluna Identity
+                .ValueGeneratedOnAdd() //Gera um valor de identity toda vez que um id é adicionado
+                .UseIdentityColumn(); //Referencia com a coluna Identity
 
             builder.Property(x => x.Title)
-                .IsRequired()//NOTNULL
-                .HasColumnName("Title")//Nome da propiedade
-                .HasColumnType("NVARCHAR")//Tipo de dados
-                .HasMaxLength(80);//Maximo de caracteres
+                .IsRequired() //NOTNULL
+                .HasColumnName("Title") //Nome da propiedade
+                .HasColumnType("NVARCHAR") //Tipo de dados
+                .HasMaxLength(80); //Maximo de caracteres
 
             builder.Property(x => x.Slug)
-                .IsRequired()//NOTNULL
-                .HasColumnName("Slug")//Nome da propiedade
-                .HasColumnType("NVARCHAR")//Tipo de dados
-                .HasMaxLength(80);//Maximo de caracteres
+                .IsRequired() //NOTNULL
+                .HasColumnName("Slug") //Nome da propiedade
+                .HasColumnType("NVARCHAR") //Tipo de dados
+                .HasMaxLength(80); //Maximo de caracteres
 
             builder.Property(x => x.LastUpdateDate)
                 .HasColumnName("LastUpdateDate")
                 .IsRequired()
                 .HasColumnType("SMALLDATETIME")
                 .HasMaxLength(60)
-              .HasDefaultValue(DateTime.Now.ToUniversalTime());
+                .HasDefaultValue(DateTime.Now.ToUniversalTime());
 
             //Indices (usado para propiedades que são muito acessadas)
             builder
                 .HasIndex(x => x.Slug, "IX_Post_Slug")
-                .IsUnique();//Garante que essa propiedade é unica;
+                .IsUnique(); //Garante que essa propiedade é unica;
 
 
             builder

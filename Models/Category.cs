@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BlogEF.Models
+namespace BlogVisualStudio.Models
 {
     [Table("Category")]
     public class Category
@@ -12,6 +10,6 @@ namespace BlogEF.Models
         public string Name { get; set; }
 
         public string Slug { get; set; }
-        public List<Post> Posts { get; set; }
+        public List<Post>? Posts { get; set; }
     }
 }

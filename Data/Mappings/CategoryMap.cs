@@ -1,4 +1,4 @@
-using BlogEF.Models;
+using BlogVisualStudio.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -15,20 +15,20 @@ namespace BlogEF.Data.Mappings
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id)
-                    .ValueGeneratedOnAdd()//Gera um valor de identity toda vez que um id é adicionado
-                    .UseIdentityColumn(); //Referencia com a coluna Identity
+                .ValueGeneratedOnAdd() //Gera um valor de identity toda vez que um id é adicionado
+                .UseIdentityColumn(); //Referencia com a coluna Identity
 
             builder.Property(x => x.Name)
-                .IsRequired()//NOTNULL
-                .HasColumnName("Name")//Nome da propiedade
-                .HasColumnType("NVARCHAR")//Tipo de dados
-                .HasMaxLength(80);//Maximo de caracteres
+                .IsRequired() //NOTNULL
+                .HasColumnName("Name") //Nome da propiedade
+                .HasColumnType("NVARCHAR") //Tipo de dados
+                .HasMaxLength(80); //Maximo de caracteres
 
             builder.Property(x => x.Slug)
                 //NOTNULL
-                .HasColumnName("Slug")//Nome da propiedade
-                .HasColumnType("NVARCHAR")//Tipo de dados
-                .HasMaxLength(80);//Maximo de caracteres
+                .HasColumnName("Slug") //Nome da propiedade
+                .HasColumnType("NVARCHAR") //Tipo de dados
+                .HasMaxLength(80); //Maximo de caracteres
 
             //Indices (usado para propiedades que são muito acessadas)
             builder.HasIndex(x => x.Slug, "IX_Category_Slug")

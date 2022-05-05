@@ -2,7 +2,8 @@ using BlogEF.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .ConfigureApiBehaviorOptions(options => options.SuppressModelStateInvalidFilter = true);
 builder.Services.AddDbContext<VSBlogDataContext>();
 var app = builder.Build();
 
