@@ -1,7 +1,9 @@
 ﻿using BlogEF.Data;
+using BlogVisualStudio.Extensions;
 using BlogVisualStudio.Models;
 using BlogVisualStudio.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogVisualStudio.Controller
@@ -19,50 +21,49 @@ namespace BlogVisualStudio.Controller
                 var categories = await context.Categories.ToListAsync();
                 if (categories == null)
                     return NotFound("Does not found any categories");
-                var categoriesString = categories.ToArray().Select(category =>
-                {
-                    return
-                        $" Category ID: {category.Id} \n Category Name: {category.Name} \n Category Posts: {category.Posts} \n Category Slug: {category.Slug} \n\r";
-                }).Aggregate("", (current, stringbuild) => current + stringbuild);
-                return (Ok(categoriesString));
+                return Ok(new ResultViewModel<List<Category>>(categories));
             }
             catch (DbUpdateException ex)
             {
-                return StatusCode(500, "1RGA - Unable to read this categories");
+                return StatusCode(500, new ResultViewModel<List<Category>>("1RGA - Unable to read this categories"));
             }
-            catch (Exception ex)
+            catch
             {
-                return StatusCode(500, "05GA - Internal Failure Server");
+                return StatusCode(500, new ResultViewModel<List<Category>>("05GA - Internal Failure Server"));
             }
         }
 
         [HttpGet("{id:int}")] //Get One
-        public async Task<IActionResult> GetByIDAsync(
+        public async Task<IActionResult> GetByIdAsync(
             [FromRoute] int id,
             [FromServices] VSBlogDataContext context)
         {
             try
             {
                 var category = await context.Categories.FirstOrDefaultAsync(x => x.Id == id);
-                return category == null ? StatusCode(500, $"Unable to find the Category {id}") : Ok(category);
+                return category == null
+                    ? StatusCode(500, new ResultViewModel<Category>($"13FS - Unable to find the Category {id}"))
+                    : Ok(new ResultViewModel<Category>(category));
             }
             catch (DbUpdateException ex)
             {
-                return StatusCode(500, $"13GS - Unable to read the Category {id}");
+                return StatusCode(500, new ResultViewModel<Category>($"13GS - Unable to read the Category {id}"));
             }
-            catch (Exception ex)
+            catch
             {
-                return StatusCode(500, $"05GS - Internal server Fail");
+                return StatusCode(500, new ResultViewModel<Category>($"05GS - Internal server Fail"));
             }
         }
 
-        [HttpPost("")] //Post a Categorie
+        [HttpPost("")] //Post a Category
         public async Task<IActionResult> PostAsync
         (
             [FromServices] VSBlogDataContext context,
             [FromBody] EditorCategoryViewModel model
         )
         {
+            if (!ModelState.IsValid)
+                return BadRequest(new ResultViewModel<Category>(ModelState.GetErrors()));
             try
             {
                 var category = new Category()
@@ -74,15 +75,15 @@ namespace BlogVisualStudio.Controller
                 };
                 await context.Categories.AddAsync(category);
                 await context.SaveChangesAsync();
-                return Created($"v1/categories/{category.Id}", category);
+                return Created($"v1/categories/{category.Id}", new ResultViewModel<Category>(category));
             }
             catch (DbUpdateException ex)
             {
-                return StatusCode(500, "12PC - Unable to include this category");
+                return StatusCode(500, new ResultViewModel<Category>("12PC - Unable to include this category"));
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "05PC - Internal Failure Server");
+                return StatusCode(500, new ResultViewModel<Category>("05PC - Internal Failure Server"));
             }
         }
 
@@ -92,11 +93,13 @@ namespace BlogVisualStudio.Controller
             [FromRoute] int id,
             [FromBody] EditorCategoryViewModel model)
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
             try
             {
                 var category = await context.Categories.FirstOrDefaultAsync(x => x.Id == id);
                 if (category == null)
-                    return StatusCode(500, $"14GS - Unable to find the {id} Category");
+                    return StatusCode(500, new ResultViewModel<Category>($"14GS - Unable to find the {id} Category"));
 
                 category.Slug = model.Slug;
                 category.Name = model.Name;
@@ -104,15 +107,15 @@ namespace BlogVisualStudio.Controller
                 context.Categories.Update(category);
                 await context.SaveChangesAsync();
 
-                return Ok(category);
+                return Ok(new ResultViewModel<Category>(category));
             }
             catch (DbUpdateException ex)
             {
-                return StatusCode(500, $"14PU - Unable to update the {id} Category");
+                return StatusCode(500, new ResultViewModel<Category>($"14PU - Unable to update the {id} Category"));
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "05PU - Internal Failure Server");
+                return StatusCode(500, new ResultViewModel<Category>("05PU - Internal Failure Server"));
             }
         }
 
@@ -126,7 +129,7 @@ namespace BlogVisualStudio.Controller
             {
                 var delete = await context.Categories.FirstOrDefaultAsync(x => x.Id == id);
                 if (delete?.Id == null)
-                    return NotFound($"11GS - Unable to find Category {id}");
+                    return NotFound(new ResultViewModel<Category>($"11GS - Unable to find Category {id}"));
                 var name = delete.Name;
 
                 context.Categories.Remove(delete);
@@ -135,11 +138,11 @@ namespace BlogVisualStudio.Controller
             }
             catch (DbUpdateException ex)
             {
-                return StatusCode(500, $"11DS - Unable to Delete Category {id}");
+                return StatusCode(500, new ResultViewModel<Category>($"11DS - Unable to Delete Category {id}"));
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "05DS - Internal Failure Server");
+                return StatusCode(500, new ResultViewModel<Category>("05DS - Internal Failure Server"));
             }
         }
     }
