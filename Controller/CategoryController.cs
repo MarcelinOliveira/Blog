@@ -17,27 +17,24 @@ namespace BlogVisualStudio.Controller
             try
             {
                 var categories = await context.Categories.ToListAsync();
-                if (categories == null)
-                    return NotFound("Does not found any categories");
-                var categoriesString = categories.ToArray().Select(category =>
-                {
-                    return
-                        $" Category ID: {category.Id} \n Category Name: {category.Name} \n Category Posts: {category.Posts} \n Category Slug: {category.Slug} \n\r";
-                }).Aggregate("", (current, stringbuild) => current + stringbuild);
+                var categoriesString = categories.ToArray()
+                    .Select(category =>
+                        $" Category ID: {category.Id} \n Category Name: {category.Name} \n Category Posts: {category.Posts} \n Category Slug: {category.Slug} \n\r")
+                    .Aggregate("", (current, stringbuild) => current + stringbuild);
                 return (Ok(categoriesString));
             }
-            catch (DbUpdateException ex)
+            catch (DbUpdateException)
             {
                 return StatusCode(500, "1RGA - Unable to read this categories");
             }
-            catch (Exception ex)
+            catch
             {
                 return StatusCode(500, "05GA - Internal Failure Server");
             }
         }
 
         [HttpGet("{id:int}")] //Get One
-        public async Task<IActionResult> GetByIDAsync(
+        public async Task<IActionResult> GetByIdAsync(
             [FromRoute] int id,
             [FromServices] VSBlogDataContext context)
         {
@@ -46,17 +43,17 @@ namespace BlogVisualStudio.Controller
                 var category = await context.Categories.FirstOrDefaultAsync(x => x.Id == id);
                 return category == null ? StatusCode(500, $"Unable to find the Category {id}") : Ok(category);
             }
-            catch (DbUpdateException ex)
+            catch (DbUpdateException)
             {
                 return StatusCode(500, $"13GS - Unable to read the Category {id}");
             }
-            catch (Exception ex)
+            catch
             {
                 return StatusCode(500, $"05GS - Internal server Fail");
             }
         }
 
-        [HttpPost("")] //Post a Categorie
+        [HttpPost("")] //Post a Category
         public async Task<IActionResult> PostAsync
         (
             [FromServices] VSBlogDataContext context,
@@ -76,11 +73,11 @@ namespace BlogVisualStudio.Controller
                 await context.SaveChangesAsync();
                 return Created($"v1/categories/{category.Id}", category);
             }
-            catch (DbUpdateException ex)
+            catch (DbUpdateException)
             {
                 return StatusCode(500, "12PC - Unable to include this category");
             }
-            catch (Exception ex)
+            catch
             {
                 return StatusCode(500, "05PC - Internal Failure Server");
             }
@@ -106,11 +103,11 @@ namespace BlogVisualStudio.Controller
 
                 return Ok(category);
             }
-            catch (DbUpdateException ex)
+            catch (DbUpdateException)
             {
                 return StatusCode(500, $"14PU - Unable to update the {id} Category");
             }
-            catch (Exception ex)
+            catch
             {
                 return StatusCode(500, "05PU - Internal Failure Server");
             }
@@ -133,11 +130,11 @@ namespace BlogVisualStudio.Controller
                 await context.SaveChangesAsync();
                 return Ok($"The Category {name}, has been deleted");
             }
-            catch (DbUpdateException ex)
+            catch (DbUpdateException)
             {
                 return StatusCode(500, $"11DS - Unable to Delete Category {id}");
             }
-            catch (Exception ex)
+            catch
             {
                 return StatusCode(500, "05DS - Internal Failure Server");
             }
