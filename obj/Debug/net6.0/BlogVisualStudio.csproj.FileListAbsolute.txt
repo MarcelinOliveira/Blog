@@ -55,3 +55,4 @@ C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\refint\BlogVisualStudio.dll
 C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\BlogVisualStudio.pdb
 C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\BlogVisualStudio.genruntimeconfig.cache
 C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\ref\BlogVisualStudio.dll
+C:\VStudioTreino\BlogVisualStudio\bin\Debug\net6.0\SecureIdentity.dll
