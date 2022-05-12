@@ -64,6 +64,10 @@
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[6.0.4, )"
+            },
+            "Secureidentity": {
+              "target": "Package",
+              "version": "[1.0.3, )"
             }
           },
           "imports": [

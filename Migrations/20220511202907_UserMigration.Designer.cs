@@ -4,6 +4,7 @@ using BlogEF.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogVisualStudio.Migrations
 {
     [DbContext(typeof(VSBlogDataContext))]
-    partial class BlogEFDataContextModelSnapshot : ModelSnapshot
+    [Migration("20220511202907_UserMigration")]
+    partial class UserMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,7 +77,7 @@ namespace BlogVisualStudio.Migrations
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(60)
                         .HasColumnType("SMALLDATETIME")
-                        .HasDefaultValue(new DateTime(2022, 5, 11, 20, 33, 5, 702, DateTimeKind.Utc).AddTicks(926))
+                        .HasDefaultValue(new DateTime(2022, 5, 11, 20, 29, 7, 526, DateTimeKind.Utc).AddTicks(6506))
                         .HasColumnName("LastUpdateDate");
 
                     b.Property<string>("Slug")
@@ -166,6 +168,7 @@ namespace BlogVisualStudio.Migrations
                         .HasColumnName("Email");
 
                     b.Property<string>("GitHub")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")

@@ -1,3 +1,9 @@
+C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\BlogVisualStudio.csproj.AssemblyReference.cache
+C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\BlogVisualStudio.GeneratedMSBuildEditorConfig.editorconfig
+C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\BlogVisualStudio.AssemblyInfoInputs.cache
+C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\BlogVisualStudio.AssemblyInfo.cs
+C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\BlogVisualStudio.csproj.CoreCompileInputs.cache
+C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\BlogVisualStudio.MvcApplicationPartsAssemblyInfo.cache
 C:\VStudioTreino\BlogVisualStudio\bin\Debug\net6.0\appsettings.Development.json
 C:\VStudioTreino\BlogVisualStudio\bin\Debug\net6.0\appsettings.json
 C:\VStudioTreino\BlogVisualStudio\bin\Debug\net6.0\BlogVisualStudio.exe
@@ -6,6 +12,7 @@ C:\VStudioTreino\BlogVisualStudio\bin\Debug\net6.0\BlogVisualStudio.runtimeconfi
 C:\VStudioTreino\BlogVisualStudio\bin\Debug\net6.0\BlogVisualStudio.dll
 C:\VStudioTreino\BlogVisualStudio\bin\Debug\net6.0\BlogVisualStudio.pdb
 C:\VStudioTreino\BlogVisualStudio\bin\Debug\net6.0\Humanizer.dll
+C:\VStudioTreino\BlogVisualStudio\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\VStudioTreino\BlogVisualStudio\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 C:\VStudioTreino\BlogVisualStudio\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 C:\VStudioTreino\BlogVisualStudio\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -39,12 +46,6 @@ C:\VStudioTreino\BlogVisualStudio\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.
 C:\VStudioTreino\BlogVisualStudio\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\VStudioTreino\BlogVisualStudio\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\VStudioTreino\BlogVisualStudio\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\BlogVisualStudio.csproj.AssemblyReference.cache
-C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\BlogVisualStudio.GeneratedMSBuildEditorConfig.editorconfig
-C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\BlogVisualStudio.AssemblyInfoInputs.cache
-C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\BlogVisualStudio.AssemblyInfo.cs
-C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\BlogVisualStudio.csproj.CoreCompileInputs.cache
-C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\BlogVisualStudio.MvcApplicationPartsAssemblyInfo.cache
 C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\staticwebassets.build.json
 C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\staticwebassets.development.json
 C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\scopedcss\bundle\BlogVisualStudio.styles.css
@@ -54,4 +55,4 @@ C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\refint\BlogVisualStudio.dll
 C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\BlogVisualStudio.pdb
 C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\BlogVisualStudio.genruntimeconfig.cache
 C:\VStudioTreino\BlogVisualStudio\obj\Debug\net6.0\ref\BlogVisualStudio.dll
-C:\VStudioTreino\BlogVisualStudio\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\VStudioTreino\BlogVisualStudio\bin\Debug\net6.0\SecureIdentity.dll
