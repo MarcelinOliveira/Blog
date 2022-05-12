@@ -24,15 +24,15 @@ namespace BlogVisualStudio.Controller
                     .Select(category =>
                         $" Category ID: {category.Id} \n Category Name: {category.Name} \n Category Posts: {category.Posts} \n Category Slug: {category.Slug} \n\r")
                     .Aggregate("", (current, stringbuild) => current + stringbuild);
-                return (Ok(categoriesString));
+                return (Ok(new ResultViewModel<string>(categoriesString, null)));
             }
             catch (DbUpdateException)
             {
-                return StatusCode(500, "1RGA - Unable to read this categories");
+                return StatusCode(500, new ResultViewModel<string>("1RGA - Unable to read this categories"));
             }
             catch
             {
-                return StatusCode(500, "05GA - Internal Failure Server");
+                return StatusCode(500, new ResultViewModel<string>("05GA - Internal Failure Server"));
             }
         }
 
@@ -47,15 +47,17 @@ namespace BlogVisualStudio.Controller
             try
             {
                 var category = await context.Categories.FirstOrDefaultAsync(x => x.Id == id);
-                return category == null ? StatusCode(500, $"Unable to find the Category {id}") : Ok(category);
+                return category == null
+                    ? StatusCode(500, new ResultViewModel<string>($"Unable to find the Category {id}"))
+                    : Ok(new ResultViewModel<Category>(category));
             }
             catch (DbUpdateException)
             {
-                return StatusCode(500, $"13GS - Unable to read the Category {id}");
+                return StatusCode(500, new ResultViewModel<string>($"13GS - Unable to read the Category {id}"));
             }
             catch
             {
-                return StatusCode(500, $"05GS - Internal server Fail");
+                return StatusCode(500, new ResultViewModel<string>($"05GS - Internal server Fail"));
             }
         }
 
@@ -78,15 +80,15 @@ namespace BlogVisualStudio.Controller
                 };
                 await context.Categories.AddAsync(category);
                 await context.SaveChangesAsync();
-                return Created($"v1/categories/{category.Id}", category);
+                return Created($"v1/categories/{category.Id}", new ResultViewModel<Category>(category));
             }
             catch (DbUpdateException)
             {
-                return StatusCode(500, "12PC - Unable to include this category");
+                return StatusCode(500, new ResultViewModel<string>("12PC - Unable to include this category"));
             }
             catch
             {
-                return StatusCode(500, "05PC - Internal Failure Server");
+                return StatusCode(500, new ResultViewModel<string>("05PC - Internal Failure Server"));
             }
         }
 
@@ -109,15 +111,15 @@ namespace BlogVisualStudio.Controller
                 context.Categories.Update(category);
                 await context.SaveChangesAsync();
 
-                return Ok(category);
+                return Ok(new ResultViewModel<Category>(category));
             }
             catch (DbUpdateException)
             {
-                return StatusCode(500, $"14PU - Unable to update the {id} Category");
+                return StatusCode(500, new ResultViewModel<string>($"14PU - Unable to update the {id} Category"));
             }
             catch
             {
-                return StatusCode(500, "05PU - Internal Failure Server");
+                return StatusCode(500, new ResultViewModel<string>("05PU - Internal Failure Server"));
             }
         }
 
@@ -132,20 +134,20 @@ namespace BlogVisualStudio.Controller
             {
                 var delete = await context.Categories.FirstOrDefaultAsync(x => x.Id == id);
                 if (delete?.Id == null)
-                    return NotFound($"11GS - Unable to find Category {id}");
+                    return NotFound(new ResultViewModel<string>($"11GS - Unable to find Category {id}"));
                 var name = delete.Name;
 
                 context.Categories.Remove(delete);
                 await context.SaveChangesAsync();
-                return Ok($"The Category {name}, has been deleted");
+                return Ok(new ResultViewModel<string>($"The Category {name}, has been deleted", null));
             }
             catch (DbUpdateException)
             {
-                return StatusCode(500, $"11DS - Unable to Delete Category {id}");
+                return StatusCode(500, new ResultViewModel<string>($"11DS - Unable to Delete Category {id}"));
             }
             catch
             {
-                return StatusCode(500, "05DS - Internal Failure Server");
+                return StatusCode(500, new ResultViewModel<string>("05DS - Internal Failure Server"));
             }
         }
     }
