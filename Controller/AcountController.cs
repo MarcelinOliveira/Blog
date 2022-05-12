@@ -14,7 +14,6 @@ namespace BlogVisualStudio.Controller;
 [Route("v1")]
 public class AcountController : ControllerBase
 {
-    [AllowAnonymous]
     [HttpPost("login")]
     public async Task<IActionResult> Login(
         [FromServices] TokenService tokenService
@@ -46,7 +45,7 @@ public class AcountController : ControllerBase
         }
     }
 
-    [AllowAnonymous]
+
     [HttpPost("account")]
     public async Task<IActionResult> Post(
         [FromBody] RegisterViewModel model

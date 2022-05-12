@@ -13,7 +13,7 @@ public static class RoleClaimExtension
         {
             new(ClaimTypes.Email, user.Email),
         };
-        result.AddRange(user.Roles.Select(role => new Claim(ClaimTypes.Role, user.Slug)));
+        result.AddRange(user.Roles.Select(role => new Claim(ClaimTypes.Role, role.Slug)));
         return result;
     }
 }

@@ -1,16 +1,19 @@
 ﻿using BlogEF.Data;
 using BlogVisualStudio.Models;
 using BlogVisualStudio.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogVisualStudio.Controller
 {
     [ApiController]
+    [Authorize]
     [Route("v1/categories")]
     public class CategoryController : ControllerBase
     {
-        [HttpGet("")] //Get List
+        [HttpGet("")]
+        [Authorize(Roles = "user")] //Get List
         public async Task<IActionResult> GetAsync(
             [FromServices] VSBlogDataContext context)
         {
@@ -34,6 +37,9 @@ namespace BlogVisualStudio.Controller
         }
 
         [HttpGet("{id:int}")] //Get One
+        [Authorize(Roles = "user")]
+        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "author")]
         public async Task<IActionResult> GetByIdAsync(
             [FromRoute] int id,
             [FromServices] VSBlogDataContext context)
@@ -53,7 +59,8 @@ namespace BlogVisualStudio.Controller
             }
         }
 
-        [HttpPost("")] //Post a Category
+        [HttpPost("Post")]
+        [Authorize(Roles = "admin")] //Post a Category
         public async Task<IActionResult> PostAsync
         (
             [FromServices] VSBlogDataContext context,
@@ -83,7 +90,8 @@ namespace BlogVisualStudio.Controller
             }
         }
 
-        [HttpPut("{id:int}")] //Update A Category
+        [HttpPut("Put/{id:int}")]
+        [Authorize(Roles = "admin")] //Update A Category
         public async Task<IActionResult> PutAsync(
             [FromServices] VSBlogDataContext context,
             [FromRoute] int id,
@@ -113,7 +121,8 @@ namespace BlogVisualStudio.Controller
             }
         }
 
-        [HttpDelete("{id:int}")] //Delete a Category
+        [HttpDelete("{id:int}")]
+        [Authorize(Roles = "admin")] //Delete a Category
         public async Task<IActionResult> DeleteAsync(
             [FromServices] VSBlogDataContext context,
             [FromRoute] int? id
